@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.4 대우를 이용한 증명법 &amp; 귀류법 - 2026 민주쌤의 수학교실</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 구글 사이트 임베드 완벽 호환 CSS & 수식 스타일 (외부 라이브러리 다운로드 없이 즉시 렌더링) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f8fafc;
+    }
+    .custom-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.4rem center;
+      background-repeat: no-repeat;
+      background-size: 1.1em 1.1em;
+      padding-right: 1.6rem;
+      appearance: none;
+    }
+    /* 수식 전용 스타일 (깨짐 원천 차단) */
+    .math {
+      font-family: "Times New Roman", Times, "Cambria Math", serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #1e293b;
+      padding: 0 1px;
+    }
+    .math-sup {
+      font-size: 0.75em;
+      vertical-align: super;
+      font-style: normal;
+    }
+    .math-sqrt {
+      white-space: nowrap;
+      font-style: normal;
+    }
+    .math-sqrt .radicand {
+      border-top: 1.5px solid #1e293b;
+      padding: 0 2px;
+      font-style: italic;
+    }
+    .math-frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 3px;
+      line-height: 1.1;
+      font-size: 0.9em;
+    }
+    .math-frac-top {
+      border-bottom: 1.2px solid #1e293b;
+      padding-bottom: 1px;
+    }
+    .submission-input {display:block;width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:9px 11px;margin-top:6px;background:#fff;outline:none;font-weight:500;}
+    .submission-input:focus {border-color:#6366f1;box-shadow:0 0 0 2px #e0e7ff;}
+    .math-frac-bottom {
+      padding-top: 1px;
+    }
+.hidden {display:none!important;}
+    .learning-textarea {width:100%; min-height:100px; resize:vertical; border:1px solid #cbd5e1; border-radius:12px; padding:12px; font-size:14px; line-height:1.7; background:white; outline:none;}
+    .learning-textarea:focus {border-color:#6366f1; box-shadow:0 0 0 3px #e0e7ff;}
+    @media print {header, footer, .no-print, button {display:none!important} body {background:white!important} .hidden {display:block!important} main {max-width:none!important}}
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between">
+
+  <!-- ================= 헤더 네비게이션 ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-xl shadow-xs">
+          🐻
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 tracking-tight">4.4 대우를 이용한 증명법 &amp; 귀류법</h1>
+          <p class="text-xs text-slate-500 font-medium">2026 민주쌤의 수학교실</p>
+        </div>
+      </div>
+
+      <!-- 3단계 탭 버튼 -->
+      <nav class="flex bg-slate-100 p-1 rounded-2xl border border-slate-200 text-sm font-semibold">
+        <button id="nav-btn-concept" onclick="switchTab('concept')" class="px-4 py-1.5 rounded-xl transition flex items-center gap-1.5 bg-white text-indigo-700 shadow-xs">
+          <span>💡</span>
+          <span>1. 개념 콕콕</span>
+        </button>
+        <button id="nav-btn-workshop" onclick="switchTab('workshop')" class="px-4 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <span>🧩</span>
+          <span>2. 실전 증명 활동</span>
+        </button>
+        <button id="nav-btn-independent" onclick="switchTab('independent')" class="px-3 sm:px-4 py-1.5 rounded-xl transition flex items-center gap-1 text-slate-600 hover:text-slate-900">
+          <span>✍️</span><span>3. 스스로 증명</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= 본문 메인 영역 ================= -->
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1">
+
+    <!-- ---------------------------------------------------- -->
+    <!-- [1번 탭] 개념 콕콕 ----------------------------------- -->
+    <!-- ---------------------------------------------------- -->
+    <div id="tab-concept" class="space-y-8">
+
+      <!-- 배너 안내 -->
+      <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-xs flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-3xl shrink-0">
+          🎓
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-1">
+            개념 다지기 활동
+          </span>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">
+            드롭박스에서 알맞은 답을 선택하여 개념과 핵심 증명 과정을 완성해보세요!
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">
+            문제를 풀고 각 영역 아래에 있는 [채점하기] 버튼을 누르면 정답 여부를 즉시 확인할 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- [A] 기본 개념 정리 섹션 -->
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-6 bg-indigo-600 rounded-full"></span>
+            <h3 class="text-lg font-bold text-slate-900">기본 개념 정리</h3>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">용어의 올바른 뜻을 연결해보세요</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- [1] 정의 카드 -->
+          <div class="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-bold text-indigo-700">[1]</span>
+                <select id="bc-1" data-ans="정의" class="custom-select font-bold text-indigo-900 bg-white border border-indigo-300 rounded-lg px-2.5 py-1 text-sm focus:ring-2 focus:ring-indigo-400 outline-none">
+                  <option value="">선택...</option>
+                  <option value="정의">정의</option>
+                  <option value="정리">정리</option>
+                  <option value="증명">증명</option>
+                  <option value="성질">성질</option>
+                </select>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                용어의 뜻을 명확하게 정한 것
+              </p>
+              <div class="mt-2 text-xs bg-white p-2 rounded-xl border border-slate-200 text-slate-600">
+                <span class="font-bold text-slate-800">예)</span> 두 변의 길이가 같은 삼각형은 이등변삼각형이다.
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-400 font-medium">용어의 약속이자 출발점</div>
+          </div>
+
+          <!-- [2] 정리 카드 -->
+          <div class="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-bold text-indigo-700">[2]</span>
+                <select id="bc-2" data-ans="정리" class="custom-select font-bold text-indigo-900 bg-white border border-indigo-300 rounded-lg px-2.5 py-1 text-sm focus:ring-2 focus:ring-indigo-400 outline-none">
+                  <option value="">선택...</option>
+                  <option value="정의">정의</option>
+                  <option value="정리">정리</option>
+                  <option value="증명">증명</option>
+                  <option value="성질">성질</option>
+                </select>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                참임이 증명된 명제 중에서 기본이 되는 것이나, 다른 명제를 증명할 때 이용할 수 있는 것
+                <span class="inline-flex items-center gap-1 font-semibold text-slate-800">
+                  (≒ 
+                  <select id="bc-prop" data-ans="성질" class="custom-select font-bold text-indigo-900 bg-white border border-indigo-300 rounded-lg px-2 py-0.5 text-xs focus:ring-2 focus:ring-indigo-400 outline-none">
+                    <option value="">선택...</option>
+                    <option value="정의">정의</option>
+                    <option value="정리">정리</option>
+                    <option value="증명">증명</option>
+                    <option value="성질">성질</option>
+                  </select>
+                  )
+                </span>
+              </p>
+              <div class="mt-2 text-xs bg-white p-2 rounded-xl border border-slate-200 text-slate-600">
+                <span class="font-bold text-slate-800">예)</span> 이등변삼각형의 두 밑각의 크기는 같다.
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-400 font-medium">이미 증명되어 활용 가능한 참인 명제</div>
+          </div>
+
+          <!-- [3] 증명 카드 -->
+          <div class="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-bold text-indigo-700">[3]</span>
+                <select id="bc-3" data-ans="증명" class="custom-select font-bold text-indigo-900 bg-white border border-indigo-300 rounded-lg px-2.5 py-1 text-sm focus:ring-2 focus:ring-indigo-400 outline-none">
+                  <option value="">선택...</option>
+                  <option value="정의">정의</option>
+                  <option value="정리">정리</option>
+                  <option value="증명">증명</option>
+                  <option value="성질">성질</option>
+                </select>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                옳다고 밝혀진 성질들을 이용하여 어떤 명제가 
+                <select id="bc-truth" data-ans="참" class="custom-select font-bold text-indigo-900 bg-white border border-indigo-300 rounded-lg px-2 py-0.5 text-xs focus:ring-2 focus:ring-indigo-400 outline-none">
+                  <option value="">선택...</option>
+                  <option value="참">참</option>
+                  <option value="거짓">거짓</option>
+                </select>
+                임을 설명하는 것
+              </p>
+              <div class="mt-2 text-xs bg-white p-2 rounded-xl border border-slate-200 text-slate-600">
+                <span class="font-bold text-slate-800">참고)</span> 논리적 근거를 바탕으로 참임을 입증하는 논증 과정
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-400 font-medium">논리적 연역 과정</div>
+          </div>
+        </div>
+
+        <!-- 기본 개념 채점 버튼 -->
+        <div class="pt-2 flex justify-end">
+          <button onclick="checkBasicConceptGroup()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center gap-1.5">
+            <span>✓</span>
+            <span>기본 개념 채점하기</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- [B] 대우를 이용한 증명법 섹션 -->
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-6 bg-blue-600 rounded-full"></span>
+            <h3 class="text-lg font-bold text-slate-900">대우를 이용한 증명법</h3>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">원래 명제가 어려울 땐 대우를 생각해요</span>
+        </div>
+
+        <!-- 원리 박스 -->
+        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-800 space-y-2">
+          <p class="leading-relaxed">
+            1) 명제가 
+            <select id="daewoo-core-1" data-ans="참" class="custom-select font-bold text-blue-900 bg-white border border-blue-300 rounded px-2 py-0.5 text-xs">
+              <option value="">선택...</option>
+              <option value="참">참</option>
+              <option value="거짓">거짓</option>
+            </select>
+            이면, 그 대우도 
+            <select id="daewoo-core-2" data-ans="참" class="custom-select font-bold text-blue-900 bg-white border border-blue-300 rounded px-2 py-0.5 text-xs">
+              <option value="">선택...</option>
+              <option value="참">참</option>
+              <option value="거짓">거짓</option>
+            </select>
+            임을 이용해서 증명하는 방법!
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            2) 원래 명제가 증명하기 어려울 때, '대우인 명제'를 만들어 증명해보는 방법으로, 대우를 이용한 풀이를 많이 읽고 안 보고 적어보는 연습을 추천합니다.
+          </p>
+        </div>
+
+        <!-- 예시 증명 인터랙티브 박스 -->
+        <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/40 space-y-4">
+          <div class="inline-block px-3 py-1 bg-amber-100 text-amber-900 font-bold text-xs rounded-lg">
+            [예시] '자연수 <span class="math">n</span>에 대하여 <span class="math">n<span class="math-sup">2</span></span>이 짝수이면 <span class="math">n</span>도 짝수이다.'
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-800 leading-loose">
+            <!-- 1단계 -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-blue-700 mr-1">①</span> 
+              주어진 명제의 대우는 자연수 <span class="math">n</span>에 대하여 
+              <span class="inline-flex items-center gap-1 mx-1">
+                [
+                <select id="d-ex-1" data-ans="n" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                  <option value="">선택...</option>
+                  <option value="n">n</option>
+                  <option value="n^2">n²</option>
+                </select>
+                이(가) 
+                <select id="d-ex-2" data-ans="홀수" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                  <option value="">선택...</option>
+                  <option value="홀수">홀수</option>
+                  <option value="짝수">짝수</option>
+                </select>
+                ]
+              </span>
+              이면 
+              <span class="inline-flex items-center gap-1 mx-1">
+                [
+                <select id="d-ex-3" data-ans="n^2" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                  <option value="">선택...</option>
+                  <option value="n">n</option>
+                  <option value="n^2">n²</option>
+                </select>
+                이(가) 
+                <select id="d-ex-4" data-ans="홀수" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                  <option value="">선택...</option>
+                  <option value="홀수">홀수</option>
+                  <option value="짝수">짝수</option>
+                </select>
+                ]
+              </span>
+              이다.
+            </div>
+
+            <!-- 2단계 -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-blue-700 mr-1">②</span>
+              "<span class="math">n</span>이 홀수이면 <span class="math">n<span class="math-sup">2</span></span>도 홀수이다."<br>
+              <span class="math">n</span>이 홀수이면 <span class="math">n</span> = (
+              <select id="d-ex-5" data-ans="2k+1" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="2k">2k</option>
+                <option value="2k+1">2k+1</option>
+                <option value="k+1">k+1</option>
+              </select>
+              ) 으로 나타낼 수 있다. (단, <span class="math">k</span>는 0 또는 자연수)
+            </div>
+
+            <!-- 3단계 -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-blue-700 mr-1">③</span>
+              <span class="math">n<span class="math-sup">2</span> = 4k<span class="math-sup">2</span> + 4k + 1 = 2(2k<span class="math-sup">2</span> + 2k) + 1</span> 이므로 <span class="math">n<span class="math-sup">2</span></span>도 
+              [
+              <select id="d-ex-6" data-ans="홀수" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="홀수">홀수</option>
+                <option value="짝수">짝수</option>
+              </select>
+              ] 이다.
+            </div>
+
+            <!-- 4단계 -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-blue-700 mr-1">④</span>
+              따라서, 주어진 명제의 대우가 
+              [
+              <select id="d-ex-7" data-ans="참" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="참">참</option>
+                <option value="거짓">거짓</option>
+              </select>
+              ] 이므로, 주어진 명제도 
+              [
+              <select id="d-ex-8" data-ans="참" class="custom-select font-bold text-blue-900 bg-blue-50 border border-blue-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="참">참</option>
+                <option value="거짓">거짓</option>
+              </select>
+              ] 이다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 대우 채점 버튼 -->
+        <div class="pt-2 flex justify-end">
+          <button onclick="checkGroupAnswers('daewoo-group')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center gap-1.5">
+            <span>✓</span>
+            <span>대우 증명법 채점하기</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- [C] 귀류법 섹션 -->
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-6 bg-purple-600 rounded-full"></span>
+            <h3 class="text-lg font-bold text-slate-900">귀류법</h3>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">결론을 부정하여 모순을 찾아내요</span>
+        </div>
+
+        <!-- 귀류법 원리 박스 -->
+        <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-800 space-y-2">
+          <p class="leading-relaxed">
+            1) 명제 p → q가 참임을 증명할 때, p가 참이고 결론 q가 거짓이라고 가정하여 
+            <select id="gyuru-core-1" data-ans="모순" class="custom-select font-bold text-purple-900 bg-white border border-purple-300 rounded px-2 py-0.5 text-xs">
+              <option value="">선택...</option>
+              <option value="모순">모순</option>
+              <option value="정리">정리</option>
+              <option value="가정">가정</option>
+            </select>
+            이 생긴다는 것을 보여도 되는데, 이렇게 증명하는 방법을 <strong>귀류법</strong>이라고 합니다.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            2) 귀류법으로 증명하는 문제들은 대개 스타일이 비슷합니다. (예: <span class="math-sqrt">√<span class="radicand">2</span></span>가 무리수임을 증명하시오 등)
+          </p>
+        </div>
+
+        <div class="bg-white border-l-4 border-purple-400 p-3 text-xs sm:text-sm text-slate-700">💡 <strong>대우와 구분:</strong> 귀류법은 가정과 결론의 부정을 함께 놓고 모순을 찾습니다. 대우 증명은 결론의 부정에서 출발해 원래 가정의 부정을 보입니다.</div>
+        <!-- 루트 2 무리수 증명 인터랙티브 박스 -->
+        <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/40 space-y-4">
+          <div class="inline-block px-3 py-1 bg-purple-100 text-purple-900 font-bold text-xs rounded-lg">
+            '귀류법을 이용하여 <span class="math-sqrt">√<span class="radicand">2</span></span>가 무리수임을 증명하시오.'
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-800 leading-loose">
+            <!-- ① -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">①</span>
+              <span class="math-sqrt">√<span class="radicand">2</span></span>가 무리수가 아닌 [
+              <select id="g-ex-1" data-ans="유리수" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="유리수">유리수</option>
+                <option value="자연수">자연수</option>
+                <option value="정수">정수</option>
+              </select>
+              ] 라고 가정하자!
+            </div>
+
+            <!-- ② -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">②</span>
+              그러면 <span class="math-sqrt">√<span class="radicand">2</span></span> = 
+              <span class="math-frac"><span class="math-frac-top math">n</span><span class="math-frac-bottom math">m</span></span>
+              (<span class="math">m, n</span>은 
+              [
+              <select id="g-ex-2" data-ans="서로소" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="서로소">서로소</option>
+                <option value="짝수">짝수</option>
+                <option value="배수">배수</option>
+              </select>
+              ] 인 자연수)로 나타낼 수 있다.
+            </div>
+
+            <!-- ③ -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">③</span>
+              위 식을 정리하면 [
+              <select id="g-ex-3" data-ans="n=√2m" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="n=√2m">n = √2 m</option>
+                <option value="m=√2n">m = √2 n</option>
+              </select>
+              ] 이고, 양변을 제곱하면 [
+              <select id="g-ex-4" data-ans="n^2=2m^2" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="n^2=2m^2">n² = 2m²</option>
+                <option value="m^2=2n^2">m² = 2n²</option>
+              </select>
+              ]
+            </div>
+
+            <!-- ④ -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">④</span>
+              이 때, <span class="math">n<span class="math-sup">2</span></span>이 짝수이므로 <span class="math">n</span>도 [
+              <select id="g-ex-5" data-ans="짝수" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="짝수">짝수</option>
+                <option value="홀수">홀수</option>
+              </select>
+              ] 이다.
+            </div>
+
+            <!-- ⑤ -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">⑤</span>
+              <span class="math">n = 2k</span> (<span class="math">k</span>는 자연수)로 나타낼 수 있으므로 3번 식에 대입하면 [
+              <select id="g-ex-6" data-ans="4k^2=2m^2" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="4k^2=2m^2">4k² = 2m²</option>
+                <option value="2k^2=4m^2">2k² = 4m²</option>
+              </select>
+              ]. 즉, <span class="math">2k<span class="math-sup">2</span> = m<span class="math-sup">2</span></span>
+            </div>
+
+            <!-- ⑥ -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">⑥</span>
+              그러면 <span class="math">m<span class="math-sup">2</span></span>이 짝수이므로 <span class="math">m</span>도 [
+              <select id="g-ex-7" data-ans="짝수" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="짝수">짝수</option>
+                <option value="홀수">홀수</option>
+              </select>
+              ] 이다.
+            </div>
+
+            <!-- ⑦ -->
+            <div class="p-3 bg-white rounded-xl border border-slate-200">
+              <span class="font-bold text-purple-700 mr-1">⑦</span>
+              4, 6번에 의해 둘 다 짝수이므로 [
+              <select id="g-ex-8" data-ans="2" class="custom-select font-bold text-purple-900 bg-purple-50 border border-purple-300 rounded px-2 py-0.5 text-xs">
+                <option value="">선택...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              ] 번에서 m, n이 서로소라고 한 가정과 모순된다. 따라서 <span class="math-sqrt">√<span class="radicand">2</span></span>는 무리수이다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 귀류법 채점 버튼 -->
+        <div class="pt-2 flex justify-end">
+          <button onclick="checkGroupAnswers('gyuru-group')" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center gap-1.5">
+            <span>✓</span>
+            <span>귀류법 채점하기</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- [2번 탭] 실전 증명 활동 ------------------------------- -->
+    <!-- ---------------------------------------------------- -->
+    <div id="tab-workshop" class="hidden space-y-6">
+
+      <!-- 상단 안내 -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-2xl shrink-0">
+            🧩
+          </div>
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">실전 증명 완성 활동: 단계별 빈칸 채우기</h2>
+            <p class="text-xs text-slate-500">
+              문제를 탭별로 하나씩 선택하여 증명 속 핵심 빈칸을 채우고, 우측 상단의 [이 문제 채점] 버튼으로 확인해보세요.
+            </p>
+          </div>
+        </div>
+
+        <button onclick="resetCurrentProblemAnswers()" class="text-xs text-slate-500 hover:text-rose-600 font-bold px-3 py-1.5 rounded-lg border border-slate-200 hover:border-rose-300 transition flex items-center gap-1">
+          <span>↺</span>
+          <span>현재 문제 초기화</span>
+        </button>
+      </div>
+
+      <!-- 문제 탭 네비게이션 버튼 -->
+      <div class="flex flex-wrap items-center gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200" id="problem-tab-buttons">
+        <!-- JS에서 문제별 탭 버튼 생성 -->
+      </div>
+
+      <!-- 선택된 단일 문제 및 증명 영역 -->
+      <div id="active-problem-container" class="space-y-5">
+        <!-- JS에서 선택된 문제 내용 렌더링 -->
+      </div>
+
+    </div>
+
+    <!-- [3번 탭] 독립 증명 · 비교 · 형성평가 -->
+    <div id="tab-independent" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-4">
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-teal-100 text-teal-800">3단계 · 증명 전 사고하기</span>
+        <h2 class="text-xl font-extrabold">이번에는 증명 방법을 스스로 선택해 보세요.</h2>
+        <p class="text-sm text-slate-600">문제에는 방법을 표시하지 않았어요. 먼저 어떤 출발이 자연스러운지 판단한 뒤 논리적 근거를 적으세요.</p>
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-sm font-semibold">자연수 n에 대하여, n²이 3의 배수이면 n도 3의 배수임을 증명하시오.</div>
+        <fieldset class="space-y-2 text-sm" id="method-choice">
+          <legend class="font-bold mb-2">① 어떤 증명 전략을 선택할까요?</legend>
+          <label class="block"><input type="radio" name="strategy" value="direct" class="mr-2">직접 증명</label>
+          <label class="block"><input type="radio" name="strategy" value="contra" class="mr-2">대우를 이용한 증명</label>
+          <label class="block"><input type="radio" name="strategy" value="absurd" class="mr-2">귀류법</label>
+        </fieldset>
+        <label class="block text-sm font-bold" for="strategy-reason">② 왜 그 방법을 골랐나요?</label>
+        <textarea id="strategy-reason" class="learning-textarea" placeholder="증명의 출발 가정이나 방법을 선택한 이유를 적어 보세요."></textarea>
+        <label class="block text-sm font-bold" for="proof-writing">③ 직접 증명해 보세요.</label>
+        <textarea id="proof-writing" class="learning-textarea" style="min-height:220px" placeholder="가정 → 식 또는 경우 구분 → 결론의 순서로 논리를 이어 보세요."></textarea>
+        <div class="flex flex-wrap gap-2 no-print">
+          <button onclick="reviewStrategy()" class="bg-teal-600 text-white font-bold text-sm px-4 py-2 rounded-xl">선택한 전략 점검하기</button>
+          <button onclick="toggleModelProof()" class="bg-slate-100 text-slate-700 border border-slate-300 font-bold text-sm px-4 py-2 rounded-xl">예시 증명 보기 / 숨기기</button>
+          <button onclick="copyProof()" class="bg-white text-indigo-700 border border-indigo-300 font-bold text-sm px-4 py-2 rounded-xl">내 증명 복사</button>
+        </div>
+        <div id="strategy-feedback" role="status" class="hidden p-3 rounded-xl text-sm bg-teal-50 text-teal-900"></div>
+        <div id="model-proof" class="hidden p-4 rounded-2xl border border-slate-200 bg-slate-50 text-sm space-y-2 leading-relaxed">
+          <strong>예시: 대우를 이용한 증명</strong>
+          <p>대우는 'n이 3의 배수가 아니면 n²도 3의 배수가 아니다'이다.</p>
+          <p>n이 3의 배수가 아니면, 어떤 음이 아닌 정수 k에 대하여 n=3k+1 또는 n=3k+2이다.</p>
+          <p>(i) n=3k+1이면 n²=3(3k²+2k)+1이므로 3의 배수가 아니다.</p>
+          <p>(ii) n=3k+2이면 n²=3(3k²+4k+1)+1이므로 3의 배수가 아니다.</p>
+          <p>따라서 대우가 참이므로 원래 명제도 참이다.</p>
+          <p class="text-slate-500 text-xs">이것은 비교를 위한 예시이지 자동 채점 결과가 아닙니다.</p>
+        </div>
+      </section>
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-4">
+        <h2 class="text-lg font-extrabold">대우법과 귀류법, 무엇이 다를까?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="border border-blue-200 rounded-2xl p-4 bg-blue-50"><strong class="text-blue-900">대우를 이용한 증명</strong><p class="mt-2">p → q 대신 ¬q → ¬p가 참임을 보인다.</p><p class="mt-1 text-slate-600">출발: 결론의 부정(¬q)</p><p class="text-slate-600">목표: 가정의 부정(¬p)</p></div>
+          <div class="border border-purple-200 rounded-2xl p-4 bg-purple-50"><strong class="text-purple-900">귀류법</strong><p class="mt-2">p와 ¬q가 동시에 성립한다고 가정하여 모순을 이끌어 낸다.</p><p class="mt-1 text-slate-600">출발: p와 ¬q를 함께 가정</p><p class="text-slate-600">목표: 모순을 찾아 ¬q가 불가능함을 보임</p></div>
+        </div>
+        <p class="text-xs text-slate-600">두 방법은 논리적으로 밀접하며, 같은 논증을 다르게 서술할 수도 있습니다. 핵심은 어떤 가정과 결론을 명확히 제시했는지입니다.</p>
+      </section>
+      <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
+        <h2 class="text-lg font-extrabold">수업 마무리: 나의 증명 점검</h2>
+        <p class="text-sm text-slate-600">아래는 자기점검표입니다. 교사의 평가나 자동으로 판단한 점수가 아니에요.</p>
+        <label class="block text-sm"><input type="checkbox" class="mr-2">증명할 명제의 가정과 결론을 구분했다.</label>
+        <label class="block text-sm"><input type="checkbox" class="mr-2">대우를 이용한다면 대우를 정확히 만들었다.</label>
+        <label class="block text-sm"><input type="checkbox" class="mr-2">귀류법이라면 가정과 모순되는 지점을 명확히 적었다.</label>
+        <label class="block text-sm"><input type="checkbox" class="mr-2">짝수·홀수·배수 등의 성질에 논리적 근거를 제시했다.</label>
+        <label class="block text-sm"><input type="checkbox" class="mr-2">따라서 원래 명제가 참임을 명시했다.</label>
+      </section>
+    </div>
+
+  </main>
+
+
+  <!-- 제출용 PDF 보고서 -->
+  <section class="max-w-6xl w-full mx-auto px-4 pb-3 no-print" aria-label="과제 제출">
+    <div class="bg-white rounded-3xl border border-indigo-200 p-5 shadow-sm flex flex-col gap-3">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div><h2 class="text-lg font-extrabold text-slate-900">📄 과제 제출 · 내 답안 PDF 내보내기</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">세 가지 탭의 선택 답안, 5문제의 증명 설계와 빈칸 답안, 마지막 서술형 증명 및 자기점검을 한 파일로 모아요.</p></div>
+        <button onclick="exportStudentReport()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl px-5 py-3 text-sm shrink-0">📄 내 답안 모아 PDF로 저장</button>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <label class="text-sm font-bold text-slate-700">학년<input id="student-grade" class="submission-input" placeholder="예: 1" inputmode="numeric" autocomplete="off"></label>
+        <label class="text-sm font-bold text-slate-700">반<input id="student-class" class="submission-input" placeholder="예: 3" inputmode="numeric" autocomplete="off"></label>
+        <label class="text-sm font-bold text-slate-700">번호<input id="student-number" class="submission-input" placeholder="예: 12" inputmode="numeric" autocomplete="off"></label>
+        <label class="text-sm font-bold text-slate-700">이름<input id="student-name" class="submission-input" placeholder="학생 이름" autocomplete="off"></label>
+      </div>
+      <p class="text-xs text-slate-500">'내보내기'를 누르면 인쇄용 보고서가 새 창에 열립니다. 그 창에서 <strong>PDF로 저장</strong>을 누르고 인쇄 대상에서 <strong>PDF로 저장</strong>을 선택하세요. 작성하지 않은 답은 '미작성'으로 표시됩니다. 학생 답안은 서버로 전송되지 않습니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= 푸터 ================= -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-10">
+    공통수학2 명제와 증명 • 대우를 이용한 증명법과 귀류법 인터랙티브 수업 도구
+  </footer>
+
+  <!-- ================= 커스텀 알림 토스트 ================= -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+    <div id="toast-content" class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-semibold">
+      <span id="toast-icon">ℹ️</span>
+      <span id="toast-msg">메시지 내용</span>
+    </div>
+  </div>
+
+  <!-- ================= 독립 실행형 스크립트 영역 ================= -->
+  <script>
+    /* --------------------------------------------------------
+       1. 데이터 정의 (순수 웹 표준 텍스트 및 기호 사용)
+    -------------------------------------------------------- */
+    const PROBLEMS_DATA = [
+      {
+        id: "p1",
+        type: "daewoo",
+        sourceLabel: "[문제 2]",
+        title: "두 수의 곱이 짝수이면 적어도 하나는 짝수",
+        statement: "자연수 <span class='math'>m, n</span>에 대하여 명제 <strong>'mn이 짝수이면 m은 짝수 또는 n은 짝수이다.'</strong>가 참임을 대우를 이용하여 증명하시오.",
+        piece: {
+          id: "piece-2",
+          tag: "대우 증명",
+          steps: [
+            { text: "① 주어진 명제의 대우인 'm이 [blank1] 이고 n도 [blank2] 이면 [blank3] 은(는) [blank4] 이다.'가 참임을 보이면 된다." },
+            { text: "② m, n이 홀수이면 m = [blank5], n = [blank6] (k, t는 자연수)로 나타낼 수 있으므로" },
+            { text: "③ mn = [blank7] = [blank8]" },
+            { text: "④ 따라서 mn은 [blank9] 이(가) 된다." },
+            { text: "⑤ 주어진 명제의 대우가 [blank10] 이므로, 주어진 명제도 [blank11] 이다." }
+          ],
+          blanks: {
+            blank1: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank2: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank3: { ans: "mn", options: ["mn", "m+n", "m²+n²", "m-n"] },
+            blank4: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank5: { ans: "2k-1", options: ["2k-1", "2k", "2k+2"] },
+            blank6: { ans: "2t-1", options: ["2t-1", "2t", "2t+2"] },
+            blank7: { ans: "(2k-1)(2t-1)", options: ["(2k-1)(2t-1)", "(2k)(2t)", "(2k+1)(2t+1)"] },
+            blank8: { ans: "2(2kt-k-t)+1", options: ["2(2kt-k-t)+1", "4kt-2k-2t", "2(kt-1)+1"] },
+            blank9: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank10: { ans: "참", options: ["참", "거짓"] },
+            blank11: { ans: "참", options: ["참", "거짓"] }
+          }
+        }
+      },
+      {
+        id: "p2",
+        type: "daewoo",
+        sourceLabel: "[문제 3]",
+        title: "제곱이 3의 배수이면 원래 수도 3의 배수",
+        statement: "자연수 <span class='math'>n</span>에 대하여 명제 <strong>'n²이 3의 배수이면 n도 3의 배수이다.'</strong>가 참임을 대우를 이용하여 증명하시오.",
+        piece: {
+          id: "piece-3",
+          tag: "대우 증명",
+          steps: [
+            { text: "① 주어진 명제의 대우인 'n이 [blank1] 가 아니면 n²도 [blank2] 가 아니다.'가 참임을 보이면 된다." },
+            { text: "② n이 3의 배수가 아니면 n = [blank3] 또는 n = [blank4] (k는 자연수)로 나타낼 수 있으므로" },
+            { text: "③ (i) n = 3k - 2일 때: n² = 9k² - 12k + 4 = [blank5]" },
+            { text: "④ (ii) n = 3k - 1일 때: n² = 9k² - 6k + 1 = [blank6]" },
+            { text: "⑤ (i), (ii)에 의해 n²은 3의 배수가 [blank7] ." },
+            { text: "⑥ 따라서 주어진 명제의 대우가 [blank8] 이므로, 주어진 명제도 [blank9] 이다." }
+          ],
+          blanks: {
+            blank1: { ans: "3의 배수", options: ["3의 배수", "짝수", "홀수"] },
+            blank2: { ans: "3의 배수", options: ["3의 배수", "짝수", "홀수"] },
+            blank3: { ans: "3k-2", options: ["3k-2", "3k", "3k+1"] },
+            blank4: { ans: "3k-1", options: ["3k-1", "3k", "3k+2"] },
+            blank5: { ans: "3(3k²-4k+1)+1", options: ["3(3k²-4k+1)+1", "3(3k²-4k)+4", "3(k²-k)+1"] },
+            blank6: { ans: "3(3k²-2k)+1", options: ["3(3k²-2k)+1", "3(3k²-2k)-1", "3(k²-k)+1"] },
+            blank7: { ans: "아니다", options: ["아니다", "맞다"] },
+            blank8: { ans: "참", options: ["참", "거짓"] },
+            blank9: { ans: "참", options: ["참", "거짓"] }
+          }
+        }
+      },
+      {
+        id: "p3",
+        type: "daewoo",
+        sourceLabel: "[대 16]",
+        title: "피타고라스 등식과 짝수 존재성",
+        statement: "자연수 <span class='math'>a, b, c</span>에 대하여 명제 <strong>'a² + b² = c²이면 a, b, c 중 적어도 하나는 짝수이다.'</strong>가 참임을 대우를 이용하여 증명하시오.",
+        piece: {
+          id: "piece-16",
+          tag: "대우 증명",
+          steps: [
+            { text: "① 주어진 명제의 대우는 'a, b, c가 [blank1] 이면, [blank2]'이다." },
+            { text: "② a, b, c가 [blank3] 이면, a², b², c²은 모두 [blank4] 이다." },
+            { text: "③ 두 홀수의 합(a² + b²)은 [blank5] 이고, c²은 [blank6] 이므로 a² + b² [blank7] c²이다." },
+            { text: "④ 따라서 주어진 명제의 대우가 [blank8] 이므로, 주어진 명제도 [blank9] 이다." }
+          ],
+          blanks: {
+            blank1: { ans: "모두 홀수", options: ["모두 홀수", "적어도 하나 홀수", "모두 짝수"] },
+            blank2: { ans: "a²+b²≠c²", options: ["a²+b²≠c²", "a²+b²=c²", "a²+b²>c²"] },
+            blank3: { ans: "모두 홀수", options: ["모두 홀수", "모두 짝수", "적어도 하나 홀수"] },
+            blank4: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank5: { ans: "짝수", options: ["짝수", "홀수"] },
+            blank6: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank7: { ans: "≠", options: ["≠", "=", ">"] },
+            blank8: { ans: "참", options: ["참", "거짓"] },
+            blank9: { ans: "참", options: ["참", "거짓"] }
+          }
+        }
+      },
+      {
+        id: "p4",
+        type: "gyuru",
+        sourceLabel: "[문제 5]",
+        title: "제곱의 합이 0이면 각각 0",
+        statement: "실수 <span class='math'>a, b</span>에 대하여 명제 <strong>'a² + b² = 0이면 a=0이고 b=0이다.'</strong>가 참임을 귀류법을 이용하여 증명하시오.",
+        piece: {
+          id: "piece-5",
+          tag: "귀류법 증명",
+          steps: [
+            { text: "① 주어진 결론을 부정하여 [blank1] 또는 [blank2] 라고 가정하자." },
+            { text: "② (i) a ≠ 0, b = 0이면 a² + b² [blank3] 0<br>(ii) a = 0, b ≠ 0이면 a² + b² [blank4] 0<br>(iii) a ≠ 0, b ≠ 0이면 a² + b² [blank5] 0" },
+            { text: "③ (i), (ii), (iii) 모두 a² + b² = 0이라는 가정에 [blank6] 이다." },
+            { text: "④ 따라서 a² + b² = 0이면 a = [blank7] 이고 b = [blank8] 이다." }
+          ],
+          blanks: {
+            blank1: { ans: "a≠0", options: ["a≠0", "a=0", "a>0"] },
+            blank2: { ans: "b≠0", options: ["b≠0", "b=0", "b>0"] },
+            blank3: { ans: ">", options: [">", "=", "<"] },
+            blank4: { ans: ">", options: [">", "=", "<"] },
+            blank5: { ans: ">", options: [">", "=", "<"] },
+            blank6: { ans: "모순", options: ["모순", "일치", "성립"] },
+            blank7: { ans: "0", options: ["0", "1", "-1"] },
+            blank8: { ans: "0", options: ["0", "1", "-1"] }
+          }
+        }
+      },
+      {
+        id: "p5",
+        type: "gyuru",
+        sourceLabel: "[익 13]",
+        title: "제곱의 합이 짝수이면 합도 짝수",
+        statement: "자연수 <span class='math'>m, n</span>에 대하여 명제 <strong>'m² + n²이 짝수이면 m+n도 짝수이다.'</strong>가 참임을 귀류법을 이용하여 증명하시오.",
+        piece: {
+          id: "piece-13",
+          tag: "귀류법 증명",
+          steps: [
+            { text: "① 주어진 결론을 부정하여 m + n이 [blank1] 라고 가정하자." },
+            { text: "② 즉, m + n = [blank2] (k는 자연수)라고 나타낼 수 있다." },
+            { text: "③ m + n이 홀수이면 m, n 중 하나는 [blank3] 이고 다른 하나는 [blank4] 이다." },
+            { text: "④ 따라서 m²은 홀수, n²은 짝수(또는 그 반대)가 되므로 m² + n²은 [blank5] 이다." },
+            { text: "⑤ 이는 m² + n²이 [blank6] 라는 가정에 [blank7] 이다." },
+            { text: "⑥ 따라서 m² + n²이 짝수이면, m + n도 [blank8] 이다." }
+          ],
+          blanks: {
+            blank1: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank2: { ans: "2k+1", options: ["2k+1", "2k", "k+1"] },
+            blank3: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank4: { ans: "짝수", options: ["짝수", "홀수"] },
+            blank5: { ans: "홀수", options: ["홀수", "짝수"] },
+            blank6: { ans: "짝수", options: ["짝수", "홀수"] },
+            blank7: { ans: "모순", options: ["모순", "일치"] },
+            blank8: { ans: "짝수", options: ["짝수", "홀수"] }
+          }
+        }
+      }
+    ];
+
+    const thinkingNotes = {};
+    const proofOpen = {};
+    const hintOpen = {};
+    const STEP_HINTS = {
+      p1: ["'A 또는 B'의 부정은 'A가 아니고 B도 아니다'입니다.","홀수는 2k-1 또는 2k+1로 나타낼 수 있습니다.","곱셈을 전개하고 2×정수+1의 형태를 만드세요.","2×정수+1은 어떤 수일까요?","원래 명제와 대우의 참·거짓은 같습니다."],
+      p2: ["'3의 배수이다'의 부정을 생각하세요.","3으로 나눈 나머지는 1 또는 2입니다.","3의 배수에 1을 더한 꼴로 정리해 보세요.","두 경우 모두 나머지가 1인지 확인하세요.","각 경우에서 3의 배수가 아니라는 결론을 내리세요.","대우가 참이면 원래 명제도 참입니다."],
+      p3: ["'적어도 하나가 짝수'의 부정은 모두 홀수입니다.","홀수의 제곱은 홀수입니다.","두 홀수의 합은 짝수이고 홀수와 같을 수 없습니다.","대우의 참·거짓과 원래 명제를 연결하세요."],
+      p4: ["'a=0이고 b=0'의 부정은 'a≠0 또는 b≠0'입니다.","실수 제곱은 0 이상이고, 0이 아닌 실수의 제곱은 양수입니다.","처음 조건 a²+b²=0과 충돌하는지 확인하세요.","모순이므로 결론의 부정이 불가능합니다."],
+      p5: ["짝수의 부정은 홀수입니다. 원래 조건도 함께 유지하세요.","홀수를 2k+1로 표현하세요.","합이 홀수인 두 정수의 홀짝은 다릅니다.","홀짝이 다른 두 수의 제곱을 더하면 홀수입니다.","처음 조건과 정면으로 충돌합니다.","결론의 부정이 불가능하므로 원래 명제가 참입니다."]
+    };
+    let currentProblemId = "p1";
+
+    let userPieceAnswers = {
+      "piece-2": {},
+      "piece-3": {},
+      "piece-16": {},
+      "piece-5": {},
+      "piece-13": {}
+    };
+
+    let problemSolvedStatus = {
+      p1: false,
+      p2: false,
+      p3: false,
+      p4: false,
+      p5: false
+    };
+
+    /* --------------------------------------------------------
+       2. 초기화 및 탭 전환
+    -------------------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderWorkshopTabs();
+      renderActiveProblem();
+    });
+
+    function switchTab(tab) {
+      ['concept','workshop','independent'].forEach(name => {
+        document.getElementById('tab-'+name).classList.toggle('hidden',name!==tab);
+        const btn=document.getElementById('nav-btn-'+name);
+        btn.className='px-3 sm:px-4 py-1.5 rounded-xl transition flex items-center gap-1.5 '+(name===tab?'bg-white text-indigo-700 shadow-xs':'text-slate-600 hover:text-slate-900');
+      });
+      if(tab==='workshop'){renderWorkshopTabs();renderActiveProblem();}
+    }
+
+    /* 토스트 알림창 */
+    let toastTimeout = null;
+    function showToast(msg, type = "info") {
+      const box = document.getElementById('toast-box');
+      const text = document.getElementById('toast-msg');
+      const icon = document.getElementById('toast-icon');
+
+      text.innerText = msg;
+      if (type === "success") icon.innerText = "🎉";
+      else if (type === "warn") icon.innerText = "⚠️";
+      else icon.innerText = "ℹ️";
+
+      box.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    /* --------------------------------------------------------
+       3. [1번 탭] 개념 채점 로직
+    -------------------------------------------------------- */
+    function checkBasicConceptGroup() {
+      const ids = ['bc-1', 'bc-2', 'bc-prop', 'bc-3', 'bc-truth'];
+      let correct = 0;
+
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const expected = el.getAttribute('data-ans');
+        if (el.value === expected) {
+          correct++;
+          el.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900');
+          el.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+        } else {
+          el.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+          el.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        }
+      });
+
+      if (correct === ids.length) {
+        showToast("🎉 기본 개념 5개 항목을 모두 정확히 맞추셨습니다!", "success");
+      } else {
+        showToast(`기본 개념: ${correct} / ${ids.length} 개 정답입니다. 빨간색 항목을 수정해보세요!`, "warn");
+      }
+    }
+
+    function checkGroupAnswers(group) {
+      let ids = [];
+      let groupName = "";
+      if (group === 'daewoo-group') {
+        groupName = "대우 증명법";
+        ids = ['daewoo-core-1', 'daewoo-core-2', 'd-ex-1', 'd-ex-2', 'd-ex-3', 'd-ex-4', 'd-ex-5', 'd-ex-6', 'd-ex-7', 'd-ex-8'];
+      } else {
+        groupName = "귀류법";
+        ids = ['gyuru-core-1', 'g-ex-1', 'g-ex-2', 'g-ex-3', 'g-ex-4', 'g-ex-5', 'g-ex-6', 'g-ex-7', 'g-ex-8'];
+      }
+
+      let correct = 0;
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const expected = el.getAttribute('data-ans');
+        if (el.value === expected) {
+          correct++;
+          el.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900');
+          el.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+        } else {
+          el.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+          el.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        }
+      });
+
+      if (correct === ids.length) {
+        showToast(`🎉 축하합니다! ${groupName}의 모든 항목(${ids.length}개)이 정답입니다!`, "success");
+      } else {
+        showToast(`${groupName}: ${correct} / ${ids.length} 개 정답입니다. 다시 확인해보세요!`, "warn");
+      }
+    }
+
+    /* --------------------------------------------------------
+       4. [2번 탭] 문제별 탭 네비게이션 및 증명 본문 렌더링
+    -------------------------------------------------------- */
+    function renderWorkshopTabs() {
+      const tabNav = document.getElementById('problem-tab-buttons');
+      if (!tabNav) return;
+
+      tabNav.innerHTML = PROBLEMS_DATA.map((prob) => {
+        const isActive = prob.id === currentProblemId;
+        const isSolved = problemSolvedStatus[prob.id];
+
+        let activeClasses = isActive 
+          ? "bg-white text-indigo-700 shadow-xs font-bold border-indigo-200" 
+          : "text-slate-600 hover:text-slate-900 font-semibold border-transparent";
+
+        return `
+          <button onclick="selectProblemTab('${prob.id}')" 
+                  class="px-4 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-2 border ${activeClasses}">
+            <span class="w-2 h-2 rounded-full ${isSolved ? 'bg-emerald-500' : 'bg-slate-300'}"></span>
+            <span>${prob.sourceLabel}</span>
+            <span class="text-[11px] hidden md:inline text-slate-400">(${prob.type === 'daewoo' ? '대우' : '귀류'})</span>
+            ${isSolved ? '<span class="text-emerald-600 font-bold text-xs">✓</span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectProblemTab(problemId) {
+      currentProblemId = problemId;
+      renderWorkshopTabs();
+      renderActiveProblem();
+    }
+
+    function renderActiveProblem() {
+      const container = document.getElementById('active-problem-container');
+      if (!container) return;
+
+      const problem = PROBLEMS_DATA.find(p => p.id === currentProblemId);
+      if (!problem) return;
+
+      const piece = problem.piece;
+      const answers = userPieceAnswers[piece.id] || {};
+
+      const stepListHtml = piece.steps.map((step, index) => {
+        let text = step.text;
+        Object.keys(piece.blanks).forEach(bKey => {
+          if (text.includes(`[${bKey}]`)) {
+            const bData = piece.blanks[bKey];
+            const currentVal = answers[bKey] || "";
+            const selectHtml = `
+              <select onchange="updateBlankAnswer('${piece.id}', '${bKey}', this.value)" 
+                      id="input-${piece.id}-${bKey}"
+                      class="custom-select font-bold text-xs bg-white border border-indigo-300 rounded-lg px-2.5 py-1 text-indigo-900 mx-1 outline-none focus:ring-2 focus:ring-indigo-400">
+                <option value="">선택...</option>
+                ${bData.options.map(opt => `<option value="${opt}" ${currentVal === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+              </select>
+            `;
+            text = text.replace(`[${bKey}]`, selectHtml);
+          }
+        });
+        return `
+          <div class="p-3.5 bg-slate-50/80 rounded-2xl border border-slate-200 text-xs sm:text-sm leading-relaxed text-slate-800">
+            ${text}
+            <div class="mt-2 no-print"><button onclick="toggleStepHint('${problem.id}',${index})" class="text-indigo-700 text-xs font-bold underline underline-offset-2">💡 ${hintOpen[problem.id+':'+index] ? '힌트 숨기기':'단계 힌트 보기'}</button>
+              ${hintOpen[problem.id+':'+index] ? `<div class="mt-2 p-2 bg-indigo-50 border border-indigo-100 rounded-lg text-indigo-900">${STEP_HINTS[problem.id][index]}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-6">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-xs font-bold px-3 py-1 rounded-full ${problem.type === 'daewoo' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}">
+                  ${problem.sourceLabel} • ${problem.type === 'daewoo' ? '대우를 이용한 증명법' : '귀류법'}
+                </span>
+                <span class="font-bold text-slate-900 text-base sm:text-lg">${problem.title}</span>
+              </div>
+              <p class="text-xs text-slate-500 font-medium">문제를 잘 읽고 논리적인 흐름에 맞게 아래 증명의 빈칸을 채워보세요.</p>
+            </div>
+
+            <button onclick="checkProblem('${problem.id}')" 
+                    class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center justify-center gap-2 shrink-0">
+              <span>✓</span>
+              <span>이 문제 채점</span>
+            </button>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/70 text-slate-900 font-semibold text-xs sm:text-sm leading-relaxed flex items-start gap-3">
+            <span class="text-lg">📌</span>
+            <div>${problem.statement}</div>
+          </div>
+
+          <div class="p-4 border border-teal-200 bg-teal-50/80 rounded-2xl space-y-3">
+            <p class="text-sm font-extrabold text-teal-900">🧠 먼저 생각하기 · 증명 설계</p>
+            <p class="text-xs sm:text-sm text-slate-700">이 문제에서 무엇을 가정하고 무엇을 보여야 할까요? 빈칸을 보기 전에 한 문장으로 적어 보세요.</p>
+            <textarea id="thinking-${problem.id}" class="learning-textarea" oninput="updateThinkingNote('${problem.id}',this.value)" placeholder="예: 결론을 부정하면 …이고, 이를 이용해 …을 보이겠다.">${escapeHtml(thinkingNotes[problem.id]||'')}</textarea>
+            <button onclick="toggleProof('${problem.id}')" class="px-4 py-2 bg-teal-700 hover:bg-teal-800 text-white rounded-xl font-bold text-sm no-print">${proofOpen[problem.id] ? '단계별 빈칸 숨기기':'내 생각 정리 후 빈칸 활동 시작 →'}</button>
+          </div>
+          <div id="feedback-${problem.id}" role="status" class="hidden p-3 rounded-2xl text-xs sm:text-sm font-bold"></div>
+
+          <div id="proof-area-${problem.id}" class="space-y-4 ${proofOpen[problem.id] ? '' : 'hidden'}">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-5 bg-indigo-600 rounded-full"></span>
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base">[증명 과정]</h3>
+            </div>
+            <div class="space-y-2.5">
+              ${stepListHtml}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function escapeHtml(s) {return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+    function updateThinkingNote(problemId,val) {thinkingNotes[problemId]=val;}
+    function toggleProof(problemId) {
+      const el=document.getElementById('thinking-'+problemId);
+      if(el) thinkingNotes[problemId]=el.value;
+      proofOpen[problemId]=!proofOpen[problemId];
+      renderActiveProblem();
+    }
+    function toggleStepHint(problemId,index){
+      const key=problemId+':'+index;
+      hintOpen[key]=!hintOpen[key];
+      // 현재 선택지 DOM 값을 먼저 저장해 답안 소실 방지
+      renderActiveProblem();
+    }
+    function reviewStrategy() {
+      const selected=document.querySelector('input[name="strategy"]:checked');
+      const feedback=document.getElementById('strategy-feedback');
+      feedback.classList.remove('hidden');
+      if(!selected){feedback.textContent='먼저 방법을 하나 선택해 보세요.'; return;}
+      const texts={direct:'직접 증명은 출발 조건 n²이 3의 배수라는 사실에서 n에 관한 정보를 바로 얻기 어렵습니다. 대우를 활용하는 접근과 비교해 보세요.',contra:'대우를 선택했군요. n이 3의 배수가 아닌 두 경우를 나누어 n²도 3의 배수가 아님을 보이면 됩니다.',absurd:'귀류법도 가능합니다. n²은 3의 배수라고 두고, n이 3의 배수가 아니라고 가정한 후 모순을 찾아보세요.'};
+      feedback.textContent=texts[selected.value];
+    }
+    function toggleModelProof(){document.getElementById('model-proof').classList.toggle('hidden');}
+    function copyProof(){
+      const strategy=document.querySelector('input[name="strategy"]:checked');
+      const content='선택한 전략: '+(strategy?strategy.parentElement.textContent.trim():'미선택')+'\n선택 이유: '+document.getElementById('strategy-reason').value+'\n증명:\n'+document.getElementById('proof-writing').value;
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(content).then(()=>showToast('작성한 글을 복사했습니다.','success')).catch(()=>fallbackCopy(content));}
+      else fallbackCopy(content);
+    }
+    function fallbackCopy(content){const t=document.createElement('textarea');t.value=content;document.body.appendChild(t);t.select();const ok=document.execCommand('copy');t.remove();showToast(ok?'작성한 글을 복사했습니다.':'복사할 수 없습니다. 글을 직접 선택해 복사하세요.',ok?'success':'warn');}
+
+    function updateBlankAnswer(pieceId, blankKey, val) {
+      if (!userPieceAnswers[pieceId]) userPieceAnswers[pieceId] = {};
+      userPieceAnswers[pieceId][blankKey] = val;
+    }
+
+    function resetCurrentProblemAnswers() {
+      const problem = PROBLEMS_DATA.find(p => p.id === currentProblemId);
+      if (!problem) return;
+
+      userPieceAnswers[problem.piece.id] = {};
+      thinkingNotes[problem.id]='';
+      proofOpen[problem.id]=false;
+      Object.keys(hintOpen).filter(k=>k.startsWith(problem.id+':')).forEach(k=>delete hintOpen[k]);
+      problemSolvedStatus[problem.id] = false;
+      renderWorkshopTabs();
+      renderActiveProblem();
+      showToast(`${problem.sourceLabel}의 답변이 초기화되었습니다.`, "info");
+    }
+
+    function checkProblem(problemId) {
+      if (!proofOpen[problemId]) {showToast('먼저 증명 설계를 생각하고 빈칸 활동을 열어주세요.','warn'); return;}
+      const problem = PROBLEMS_DATA.find(p => p.id === problemId);
+      if (!problem) return;
+
+      const piece = problem.piece;
+      const feedback = document.getElementById(`feedback-${problemId}`);
+      if (!feedback) return;
+
+      feedback.classList.remove('hidden');
+
+      const answers = userPieceAnswers[piece.id] || {};
+      let correctBlanks = 0;
+      let totalBlanks = Object.keys(piece.blanks).length;
+
+      Object.keys(piece.blanks).forEach(bKey => {
+        const expected = piece.blanks[bKey].ans;
+        const userVal = answers[bKey] || "";
+        const selectEl = document.getElementById(`input-${piece.id}-${bKey}`);
+
+        if (userVal === expected) {
+          correctBlanks++;
+          if (selectEl) {
+            selectEl.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900');
+            selectEl.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+          }
+        } else {
+          if (selectEl) {
+            selectEl.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+            selectEl.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+          }
+        }
+      });
+
+      if (correctBlanks === totalBlanks) {
+        problemSolvedStatus[problem.id] = true;
+        renderWorkshopTabs();
+
+        feedback.className = "p-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-emerald-50 text-emerald-800 border border-emerald-300";
+        feedback.innerHTML = `✓ 정답입니다! ${totalBlanks}개의 빈칸을 모두 완벽하게 맞추었습니다. 다음 문제 탭으로 넘어가보세요!`;
+        showToast(`🎉 ${problem.sourceLabel} 증명을 완벽하게 완료했습니다!`, "success");
+      } else {
+        problemSolvedStatus[problem.id] = false;
+        renderWorkshopTabs();
+
+        feedback.className = "p-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-amber-50 text-amber-800 border border-amber-300";
+        feedback.innerHTML = `⚠️ 빈칸 ${correctBlanks} / ${totalBlanks}개 정답입니다. 빨간색 부분과 단계 힌트를 함께 확인하세요. <span class="block font-normal mt-1">증명은 답뿐 아니라 그 답이 성립하는 이유까지 연결해야 합니다.</span>`;
+        showToast(`빈칸 ${correctBlanks}/${totalBlanks}개 정답입니다.`, "warn");
+      }
+    }
+
+
+    /* PDF 제출 보고서: 원본의 선택 답안과 서술을 모아 인쇄 가능한 새 창 생성 */
+    function exportStudentReport(){
+      const identity={grade:document.getElementById('student-grade').value.trim(), cls:document.getElementById('student-class').value.trim(), number:document.getElementById('student-number').value.trim(), name:document.getElementById('student-name').value.trim()};
+      if(Object.values(identity).some(v=>!v)){
+        showToast('학년·반·번호·이름을 모두 입력한 후 내보내세요.','warn');
+        document.getElementById(['student-grade','student-class','student-number','student-name'][Object.values(identity).findIndex(v=>!v)]).focus();
+        return;
+      }
+      const choiceGroups=[
+        {name:'기본 개념 정리',ids:['bc-1','bc-2','bc-prop','bc-3','bc-truth'],questions:['용어의 뜻을 명확하게 정한 것','참임이 증명되어 다른 명제에 이용할 수 있는 것','정리와 비슷한 의미의 용어','참임을 논리적으로 설명하는 과정','증명에서 밝히려는 명제의 참·거짓']},
+        {name:'대우를 이용한 증명법',ids:['daewoo-core-1','daewoo-core-2','d-ex-1','d-ex-2','d-ex-3','d-ex-4','d-ex-5','d-ex-6','d-ex-7','d-ex-8'],questions:['명제가 ○이면','대우도 ○이다','대우의 가정: 대상','대우의 가정: 홀짝','대우의 결론: 대상','대우의 결론: 홀짝','홀수 n의 표현','n²의 홀짝','증명한 대우의 참·거짓','원래 명제의 참·거짓']},
+        {name:'귀류법',ids:['gyuru-core-1','g-ex-1','g-ex-2','g-ex-3','g-ex-4','g-ex-5','g-ex-6','g-ex-7','g-ex-8'],questions:['결론을 부정하여 찾아내는 것','√2를 가정한 수의 종류','분자·분모의 관계','√2=n/m에서 식 정리','양변 제곱한 식','n의 홀짝','n=2k 대입 결과','m의 홀짝','모순이 되는 가정의 번호']}
+      ];
+      const selectedValue=id=>{const node=document.getElementById(id);return node&&node.value?node.value:'미작성';};
+      let total=0,filled=0;
+      let conceptHtml=choiceGroups.map(group=>{
+        let rows=group.ids.map((id,i)=>{const val=selectedValue(id);total++;if(val!=='미작성')filled++;return `<tr><td>${i+1}. ${escapeHtml(group.questions[i])}</td><td class="answer">${escapeHtml(val)}</td></tr>`;}).join('');
+        return `<section class="section"><h3>${escapeHtml(group.name)}</h3><table><thead><tr><th>학습 항목</th><th>학생이 선택한 답</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+      }).join('');
+      const proofHtml=PROBLEMS_DATA.map(prob=>{
+        const answers=userPieceAnswers[prob.piece.id]||{};
+        const note=(thinkingNotes[prob.id]||'').trim();
+        total++;if(note)filled++;
+        const steps=prob.piece.steps.map((step,i)=>{
+          let t=step.text;
+          t=t.replace(/\[(blank\d+)\]/g,(_,key)=>{
+            total++;const val=answers[key]||'';if(val)filled++;
+            return `<strong class="filled">${escapeHtml(val||'미작성')}</strong>`;
+          });
+          return `<div class="proof-step">${t}</div>`;
+        }).join('');
+        return `<section class="section problem"><h3>${escapeHtml(prob.sourceLabel)} ${escapeHtml(prob.title)}</h3><div class="statement">${prob.statement}</div><div class="subheading">먼저 생각하기 · 내가 쓴 증명 설계</div><div class="writing">${escapeHtml(note||'미작성')}</div><div class="subheading">단계별 증명 · 선택한 빈칸</div>${steps}</section>`;
+      }).join('');
+      const strategy=document.querySelector('input[name="strategy"]:checked');
+      const reason=document.getElementById('strategy-reason').value.trim();
+      const proof=document.getElementById('proof-writing').value.trim();
+      const methods={direct:'직접 증명',contra:'대우를 이용한 증명',absurd:'귀류법'};
+      const method=strategy?methods[strategy.value]:'미선택';
+      [strategy?method:'',reason,proof].forEach(val=>{total++;if(val)filled++;});
+      const checklist=[...document.querySelectorAll('#tab-independent section:last-child input[type="checkbox"]')];
+      const checks=checklist.map(el=>`<li>${el.checked?'☑':'☐'} ${escapeHtml(el.parentElement.textContent.trim())}</li>`).join('');
+      const timestamp=new Date();
+      const dateLabel=timestamp.toLocaleString('ko-KR');
+      const filename=`공통수학2_대우와귀류법_${identity.grade}학년${identity.cls}반${identity.number}번_${identity.name}.pdf`.replace(/[\\/:*?"<>|]/g,'_');
+      const report=`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>${escapeHtml(filename)}</title><style>
+        @page{size:A4;margin:16mm 16mm 18mm}
+        *{box-sizing:border-box}body{font-family:'Malgun Gothic','Apple SD Gothic Neo','Noto Sans CJK KR',sans-serif;color:#1e293b;margin:0;background:#f1f5f9;font-size:11pt;line-height:1.65}
+        .toolbar{position:sticky;top:0;padding:13px 18px;background:#172554;color:white;display:flex;justify-content:center;align-items:center;gap:14px;z-index:3}.toolbar button{background:white;color:#172554;border:0;border-radius:9px;padding:9px 17px;font-weight:bold;cursor:pointer}.toolbar small{font-size:12px}
+        .paper{max-width:210mm;margin:16px auto;padding:20mm 16mm;background:white;box-shadow:0 3px 20px #0002}
+        .mast{border-bottom:3px solid #4f46e5;padding-bottom:12px;margin-bottom:18px}.mast h1{font-size:20pt;margin:0 0 5px;color:#172554}.meta{display:flex;gap:15px;flex-wrap:wrap;margin:8px 0;font-weight:bold}.muted{color:#64748b;font-size:9pt}.notice{background:#eef2ff;padding:10px 13px;border-radius:8px;font-size:9.5pt;margin:12px 0}
+        h2{font-size:15pt;color:#1e40af;margin:24px 0 10px;border-bottom:1px solid #cbd5e1;padding-bottom:6px}h3{font-size:12pt;margin:16px 0 8px;color:#334155}.section{margin-bottom:15px;break-inside:auto}.problem{break-before:page}.problem h3{padding:8px 12px;border-left:4px solid #4f46e5;background:#f8fafc}
+        table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9.5pt}td,th{border:1px solid #cbd5e1;padding:7px 9px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f1f5f9}td.answer{width:34%;color:#1d4ed8;font-weight:700}
+        .statement{padding:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;margin:8px 0;break-inside:avoid}.subheading{font-weight:bold;font-size:10pt;margin:13px 0 5px}.writing{white-space:pre-wrap;overflow-wrap:anywhere;min-height:36px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;}.proof-step{padding:8px 10px;margin:5px 0;background:#f8fafc;border:1px solid #e2e8f0;break-inside:avoid;overflow-wrap:anywhere}.filled{color:#1d4ed8;text-decoration:underline;text-underline-offset:2px}.final{break-before:page}.checklist{list-style:none;padding-left:4px}.checklist li{margin:6px 0}.math{font-family:'Times New Roman',serif;font-style:italic;font-weight:600}.math-sup{font-size:.75em;vertical-align:super}.math-sqrt .radicand{border-top:1px solid;padding:0 2px}.math-frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15}.math-frac-top{border-bottom:1px solid;padding:0 3px}
+        @media print{body{background:white}.toolbar{display:none}.paper{max-width:none;margin:0;padding:0;box-shadow:none}a{color:inherit}.problem{break-before:page}h2,h3{break-after:avoid}}
+      </style></head><body><div class="toolbar"><small>제출용 보고서 미리보기 · 답안을 확인하고 저장하세요</small><button onclick="window.print()">PDF로 저장 / 인쇄</button></div><main class="paper">
+        <header class="mast"><h1>대우를 이용한 증명법과 귀류법</h1><div>공통수학2 · 인터랙티브 수업 답안 보고서</div><div class="meta"><span>${escapeHtml(identity.grade)}학년 ${escapeHtml(identity.cls)}반 ${escapeHtml(identity.number)}번</span><span>이름: ${escapeHtml(identity.name)}</span></div><div class="muted">작성 내용 내보낸 시각: ${escapeHtml(dateLabel)}</div></header>
+        <div class="notice">학생이 입력하거나 선택한 답안을 모은 보고서입니다. 정답과 자동 채점 결과는 포함하지 않으며, 공란은 '미작성'으로 표시됩니다. 작성 현황: ${filled} / ${total}개 항목 작성(선택형·서술형 포함).</div>
+        <h2>1. 개념 콕콕 · 나의 선택 답안</h2>${conceptHtml}
+        <h2>2. 실전 증명 활동 · 나의 증명 과정</h2>${proofHtml}
+        <section class="final"><h2>3. 스스로 증명하기 · 나의 서술 답안</h2><div class="statement">자연수 n에 대하여, n²이 3의 배수이면 n도 3의 배수임을 증명하시오.</div>
+        <div class="subheading">선택한 증명 방법</div><div class="writing">${escapeHtml(method)}</div>
+        <div class="subheading">이 방법을 선택한 이유</div><div class="writing">${escapeHtml(reason||'미작성')}</div>
+        <div class="subheading">내가 직접 작성한 증명</div><div class="writing">${escapeHtml(proof||'미작성')}</div>
+        <div class="subheading">자기점검표</div><ul class="checklist">${checks}</ul></section>
+        <p class="muted" style="margin-top:26px;border-top:1px solid #cbd5e1;padding-top:8px">2026 민주쌤의 수학교실 · 공통수학2</p>
+        </main></body></html>`;
+      const win=window.open('','_blank');
+      if(!win){showToast('팝업이 차단되었습니다. 이 사이트의 팝업을 허용하고 다시 시도하세요.','warn');return;}
+      win.document.open();win.document.write(report);win.document.close();win.focus();
+      showToast('보고서 미리보기가 열렸습니다. 새 창에서 PDF로 저장을 누르세요.','success');
+    }
+
+  </script>
+</body>
+</html>
